@@ -105,7 +105,13 @@
        menu from blurring the page behind it. */
     header {
         border-bottom: 3px solid var(--bar-edge);
-        background: var(--bar);
+        background-color: var(--bar);
+        /* two offset layers of soft white dots on the brand blue */
+        background-image:
+            radial-gradient(rgba(255, 255, 255, 0.2) 1.4px, transparent 1.8px),
+            radial-gradient(rgba(255, 255, 255, 0.1) 1.2px, transparent 1.6px);
+        background-size: 14px 14px;
+        background-position: 0 0, 7px 7px;
         position: sticky;
         top: 0;
         z-index: 50;

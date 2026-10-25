@@ -4,6 +4,7 @@
     import Header from './Header.svelte';
     import Toasts from './Toasts.svelte';
     import Footer from './Footer.svelte';
+    import Doodles from './Doodles.svelte';
     import { toast } from '#lib/toast.svelte.ts';
     import { useLive, refresh } from '#lib/live.svelte.ts';
     import { ws } from '#lib/ws.svelte.ts';
@@ -21,6 +22,7 @@
     });
 </script>
 
+<Doodles />
 {#if !landing}<Header user={data.user} />{/if}
 {@render children()}
 {#if !landing}<Footer />{/if}
