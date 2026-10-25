@@ -3,9 +3,9 @@
     import Icon from '../Icon.svelte';
     let { children } = $props();
     const links = [
-        { href: '/settings', label: 'Profile', icon: 'user' },
-        { href: '/settings/accounts', label: 'Sign-in accounts', icon: 'shield' },
-        { href: '/settings/tokens', label: 'Access tokens', icon: 'key-round' }
+        { href: '/settings', label: 'profile', icon: 'user' },
+        { href: '/settings/accounts', label: 'accounts', icon: 'shield' },
+        { href: '/settings/tokens', label: 'access tokens', icon: 'key-round' }
     ] as const;
 </script>
 
