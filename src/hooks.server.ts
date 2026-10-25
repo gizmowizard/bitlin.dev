@@ -11,7 +11,7 @@ export const init: ServerInit = async () => {
     await ensureBootstrapped();
 };
 
-const ONBOARDING_OK = ['/welcome', '/auth/logout', '/api/markdown'];
+const ONBOARDING_OK = ['/welcome', '/auth/logout', '/api/markdown', '/tos', '/privacy'];
 const UNSAFE = new Set(['POST', 'PUT', 'PATCH', 'DELETE']);
 
 export const handle: Handle = async ({ event, resolve }) => {

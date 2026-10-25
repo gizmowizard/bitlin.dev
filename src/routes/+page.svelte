@@ -37,6 +37,10 @@
         <a class="explore" href="/explore"
             ><Icon name="compass" /> explore projects</a
         >
+        <p class="legal">
+            By continuing you agree to the <a href="/tos">Terms of Service</a>
+            and acknowledge the <a href="/privacy">Privacy Policy</a>.
+        </p>
     </div>
 
     <ul class="feats">
@@ -156,6 +160,16 @@
         justify-content: center;
         margin-top: 0.4rem;
         font-size: 0.9rem;
+    }
+    .legal {
+        margin-top: 0.4rem;
+        font-size: 0.78rem;
+        line-height: 1.5;
+        color: var(--muted);
+    }
+    .legal a {
+        text-decoration: underline;
+        text-underline-offset: 2px;
     }
     .feats {
         list-style: none;

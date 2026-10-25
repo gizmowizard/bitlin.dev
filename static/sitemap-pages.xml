@@ -12,4 +12,16 @@
         <changefreq>hourly</changefreq>
         <priority>0.8</priority>
     </url>
+    <url>
+        <loc>https://bitlin.dev/tos</loc>
+        <lastmod>2026-10-25</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    <url>
+        <loc>https://bitlin.dev/privacy</loc>
+        <lastmod>2026-10-25</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
 </urlset>
