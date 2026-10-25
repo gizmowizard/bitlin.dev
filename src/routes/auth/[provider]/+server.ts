@@ -22,5 +22,8 @@ export const GET: RequestHandler = async (event) => {
         secure: config.prod,
         maxAge: 600
     });
+
+    //inspect uri because something is trggering svelte's inbuilt errors
+    console.log('[oauth] URL:', url);
     redirect(302, url);
 };
