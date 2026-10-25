@@ -23,7 +23,21 @@
 </script>
 
 <Doodles />
-{#if !landing}<Header user={data.user} />{/if}
-{@render children()}
-{#if !landing}<Footer />{/if}
+<div class="app">
+    {#if !landing}<Header user={data.user} />{/if}
+    <div class="main">{@render children()}</div>
+    {#if !landing}<Footer />{/if}
+</div>
 <Toasts />
+
+<style>
+    .app {
+        display: flex;
+        flex-direction: column;
+        min-height: 100dvh;
+    }
+    .main {
+        flex: 1 0 auto;
+        min-width: 0;
+    }
+</style>
