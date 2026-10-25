@@ -46,12 +46,12 @@
                 >
                 <div class="menu">
                     <a href={userHref(user.username)}
-                        ><Icon name="user" /> *{user.username}</a
+                        ><Icon name="user" /> *{user.username}'s Profile'</a
                     >
-                    <a href="/dashboard"><Icon name="house" /> Dashboard</a>
-                    <a href="/settings"><Icon name="settings" /> Settings</a>
+                    <a href="/dashboard"><Icon name="house" /> dashboard</a>
+                    <a href="/settings"><Icon name="settings" /> settings</a>
                     <form method="POST" action="/auth/logout">
-                        <button><Icon name="log-out" /> Sign out</button>
+                        <button><Icon name="log-out" /> Log out :(</button>
                     </form>
                 </div>
             </details>
