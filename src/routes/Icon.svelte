@@ -47,6 +47,9 @@
     import Plus from "@lucide/svelte/icons/plus";
     import X from "@lucide/svelte/icons/x";
     import Check from "@lucide/svelte/icons/check";
+    import Sun from "@lucide/svelte/icons/sun";
+    import Moon from "@lucide/svelte/icons/moon";
+    import Monitor from "@lucide/svelte/icons/monitor";
     import Search from "@lucide/svelte/icons/search";
     import ChevronRight from "@lucide/svelte/icons/chevron-right";
     import ChevronDown from "@lucide/svelte/icons/chevron-down";
@@ -130,6 +133,9 @@
         plus: Plus,
         x: X,
         check: Check,
+        sun: Sun,
+        moon: Moon,
+        monitor: Monitor,
         search: Search,
         "chevron-right": ChevronRight,
         "chevron-down": ChevronDown,

@@ -132,7 +132,7 @@
 
 <style>
     .vitals { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.75rem; }
-    .n { font-family: var(--font-display); font-size: 2.2rem; line-height: 1; color: var(--accent); }
+    .n { font-family: var(--font-display); font-weight: 700; font-size: 1.8rem; line-height: 1; color: var(--accent); }
     .pulse { gap: 0.8rem; }
     .steps { margin: 0; padding-left: 1.2rem; }
     .plain { margin: 0; white-space: pre-wrap; font-family: var(--font); }

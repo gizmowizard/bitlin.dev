@@ -30,14 +30,26 @@
         filter = '';
         void goto(u);
     }
+
+    function onWindowClick(e: MouseEvent) {
+        if (el?.open && !el.contains(e.target as Node)) el.open = false;
+    }
+    function onWindowKey(e: KeyboardEvent) {
+        if (e.key === 'Escape' && el?.open) {
+            el.open = false;
+            el.querySelector('summary')?.focus();
+        }
+    }
 </script>
+
+<svelte:window onclick={onWindowClick} onkeydown={onWindowKey} />
 
 <details bind:this={el} class="picker">
     <summary class="btn sm">
         <Icon name={kind === 'tag' ? 'tag' : kind === 'snapshot' ? 'git-commit-horizontal' : 'git-branch'} size={14} />
         {#if label}<span class="muted">{label}</span>{/if}<span class="clip name">{current}</span><Icon name="chevron-down" size={14} />
     </summary>
-    <div class="pop">
+    <div class="pop glass">
         <input class="input" placeholder="Filter…" bind:value={filter} aria-label="Filter refs" />
         <div class="scroll">
             {#each own as b (b.name)}<button class:on={b.name === current} onclick={() => pick(b.name)}><Icon name="git-branch" size={14} /> {b.name}</button>{/each}
@@ -52,11 +64,11 @@
     .picker { position: relative; }
     summary { list-style: none; cursor: pointer; max-width: 260px; }
     summary::-webkit-details-marker { display: none; }
-    .name { max-width: 150px; font-weight: 400; }
-    .pop { position: absolute; z-index: 30; top: calc(100% + 0.4rem); left: 0; width: 280px; max-width: 86vw; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 0.5rem; display: flex; flex-direction: column; gap: 0.4rem; }
+    .name { max-width: 150px; font-weight: 500; }
+    .pop { position: absolute; z-index: 30; top: calc(100% + 0.4rem); left: 0; width: 280px; max-width: 86vw; padding: 0.5rem; display: flex; flex-direction: column; gap: 0.4rem; }
     .scroll { max-height: 260px; overflow-y: auto; display: flex; flex-direction: column; }
-    .scroll button { display: flex; align-items: center; gap: 0.5rem; padding: 0.45rem 0.55rem; border: 0; background: none; font: inherit; font-weight: 300; color: var(--fg); text-align: left; border-radius: 6px; cursor: pointer; overflow-wrap: anywhere; }
-    .scroll button:hover { background: var(--surface-2); }
-    .scroll button.on { color: var(--accent); font-weight: 400; }
+    .scroll button { display: flex; align-items: center; gap: 0.5rem; padding: 0.45rem 0.55rem; border: 0; background: none; font: inherit; font-weight: 400; color: var(--fg); text-align: left; border-radius: 8px; cursor: pointer; overflow-wrap: anywhere; }
+    .scroll button:hover { background: var(--item-hover); }
+    .scroll button.on { color: var(--accent); font-weight: 500; }
     .hd { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding: 0.5rem 0.55rem 0.2rem; }
 </style>

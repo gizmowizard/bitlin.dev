@@ -12,11 +12,13 @@
 <Meta title="Bitlin" description={tagline} />
 
 <main>
+    <div class="shapes" aria-hidden="true"><i class="s1"></i><i class="s2"></i></div>
     <img src="/bitlin.png" alt="Bitlin logo" width="160" height="160" />
     <h1>bitlin.dev</h1>
     <p class="tag">{tagline}</p>
 
     <div class="signin" id="signin">
+        <i class="orb" aria-hidden="true"></i>
         {#if data.error}<p class="err">Sign-in was cancelled.</p>{/if}
         {#each data.providers as p (p.id)}
             <a
@@ -49,6 +51,11 @@
 
 <style>
     main {
+        --shape-1: #cfd2ff;
+        --shape-2: #bfc2ff;
+        position: relative;
+        isolation: isolate;
+        overflow: clip;
         min-height: 100dvh;
         display: flex;
         flex-direction: column;
@@ -58,6 +65,47 @@
         padding: 2rem;
         text-align: center;
     }
+    /* Flat, solid shapes sitting behind the content so the glass buttons
+       have something to refract. Kept pale so text on top stays readable. */
+    .shapes {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+    }
+    .shapes i {
+        position: absolute;
+        display: block;
+        border-radius: 50%;
+        aspect-ratio: 1;
+    }
+    .s1 {
+        width: min(46vw, 420px);
+        left: -10vw;
+        top: -8vh;
+        background: var(--shape-1);
+    }
+    .s2 {
+        width: min(38vw, 340px);
+        right: -9vw;
+        bottom: -6vh;
+        background: var(--shape-2);
+    }
+    .orb {
+        position: absolute;
+        z-index: -1;
+        right: -34px;
+        top: 6px;
+        width: 92px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: var(--blue);
+        pointer-events: none;
+    }
+    :global(:root[data-theme="dark"]) main {
+        --shape-1: #15153a;
+        --shape-2: #1d1d52;
+    }
     img {
         width: clamp(112px, 22vw, 160px);
         height: auto;
@@ -65,7 +113,7 @@
         margin-bottom: 1rem;
     }
     h1 {
-        font-size: clamp(3.5rem, 12vw, 6rem);
+        font-size: clamp(2.25rem, 9vw, 4.25rem);
         line-height: 1;
         color: var(--accent);
     }
@@ -80,6 +128,8 @@
         gap: 0.6rem;
         margin-top: 1.5rem;
         width: min(100%, 300px);
+        position: relative;
+        isolation: isolate;
     }
     .signin .btn {
         padding: 0.75rem 1rem;

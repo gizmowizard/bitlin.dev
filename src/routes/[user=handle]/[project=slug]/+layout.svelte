@@ -98,6 +98,6 @@
 <style>
     .head { display: flex; justify-content: space-between; gap: 1rem; align-items: flex-start; flex-wrap: wrap; }
     .title { display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap; font-size: 1.15rem; }
-    .pname { font-family: var(--font-display); font-size: 1.9rem; color: var(--fg); line-height: 1; }
+    .pname { font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; color: var(--fg); line-height: 1; }
     .faces { display: flex; align-items: center; gap: 0.25rem; }
 </style>

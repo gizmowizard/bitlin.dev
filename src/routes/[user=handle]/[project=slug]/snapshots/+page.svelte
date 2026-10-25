@@ -68,7 +68,7 @@
     .day { text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.72rem; }
     .spine { list-style: none; margin: 0; padding: 0 0 0 1.1rem; border-left: 2px solid var(--line); display: flex; flex-direction: column; gap: 0.3rem; }
     .spine li { position: relative; padding: 0.55rem 0.8rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); }
-    .spine li::before { content: ''; position: absolute; left: -1.62rem; top: 1.05rem; width: 10px; height: 10px; border-radius: 50%; background: var(--blue); border: 2px solid var(--bg); }
+    .spine li::before { content: ''; position: absolute; left: -1.62rem; top: 1.05rem; width: 10px; height: 10px; border-radius: 50%; background: var(--blue); border: 2px solid var(--page); }
     .spine li:hover { background: var(--surface); }
     .msg { color: var(--fg); font-weight: 400; display: block; overflow-wrap: anywhere; }
 </style>

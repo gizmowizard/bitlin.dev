@@ -39,7 +39,7 @@
         align-items: flex-start;
         gap: 0.6rem;
         padding: 0.7rem 0.8rem;
-        border-radius: 10px;
+        border-radius: 12px;
         background: var(--fg);
         color: var(--bg);
         font-size: 0.88rem;
@@ -69,8 +69,15 @@
         opacity: 0.7;
         padding: 0.15rem;
     }
-    .toast button:hover {
+    .toast button:hover,
+    .toast button:focus-visible {
         opacity: 1;
+    }
+    /* `all: unset` above strips the focus ring, so put one back. */
+    .toast button:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 2px;
+        border-radius: 4px;
     }
     @keyframes in {
         from {
