@@ -6,7 +6,7 @@
 
     let { data }: PageProps = $props();
     const tagline =
-        "Git but if it was better. A parody made by GizmoWizard, with a fully functional api and source control.";
+        "A parody of Git made by GizmoWizard, featuring a fully working RESTful API, repos and more.";
 </script>
 
 <Meta title="Bitlin" description={tagline} />
@@ -14,7 +14,7 @@
 <main>
     <div class="shapes" aria-hidden="true"><i class="s1"></i><i class="s2"></i></div>
     <img src="/bitlin.png" alt="Bitlin logo" width="160" height="160" />
-    <h1>bitlin.dev</h1>
+    <h1>Bitlin.</h1>
     <p class="tag">{tagline}</p>
 
     <div class="signin" id="signin">
@@ -71,8 +71,6 @@
         padding: 2rem;
         text-align: center;
     }
-    /* Flat, solid "bricks" behind the content. Kept pale so text on top
-       stays readable; the bevel is just two crisp inset lines. */
     .shapes {
         position: absolute;
         inset: 0;
@@ -127,7 +125,6 @@
         width: clamp(112px, 22vw, 160px);
         height: auto;
         border-radius: 4px;
-        border: 2px solid var(--edge);
         margin-bottom: 1rem;
     }
     h1 {

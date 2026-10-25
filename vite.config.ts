@@ -2,7 +2,6 @@ import { defineConfig, loadEnv, type Plugin } from 'vite';
 import { sveltekit } from '@sveltejs/kit/vite';
 import adapter from '@sveltejs/adapter-node';
 
-// Dev-only: attaches /ws to Vite's HTTP server. Production uses server.js.
 function bitlinWsDev(): Plugin {
     return {
         name: 'bitlin-ws-dev',
@@ -22,7 +21,6 @@ function bitlinWsDev(): Plugin {
 }
 
 export default defineConfig(({ mode }) => {
-    // Real environment variables win over .env files.
     Object.assign(process.env, { ...loadEnv(mode, process.cwd(), ''), ...process.env });
 
     return {
