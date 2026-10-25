@@ -38,7 +38,7 @@
         </div>
         <div class="field">
             <label for="description"
-                >about <span class="muted">(optional, ofc.)</span></label
+                >about <span class="muted">(optional.)</span></label
             >
             <input
                 class="input"
@@ -63,7 +63,7 @@
             >
             <label class="opt"
                 ><input type="radio" name="visibility" value="private" /><span
-                    ><Icon name="lock" /> <b>Private</b><small class="muted"
+                    ><Icon name="lock" /> <b>private</b><small class="muted"
                         >Only you and collaborators.</small
                     ></span
                 ></label
@@ -86,7 +86,7 @@
             class="btn primary"
             style="align-self: flex-start"
             disabled={busy || !valid}
-            >{busy ? "Creating…" : "Create project"}</button
+            >{busy ? "…" : "Create!"}</button
         >
     </form>
 </div>
