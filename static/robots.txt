@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /auth/
+Disallow: /settings
+Disallow: /welcome
+Disallow: /dashboard
+Disallow: /new
+Disallow: /*/raw/
+Disallow: /*/archive
+Disallow: /*/changes
+Disallow: /*/edit/
+
+Sitemap: https://bitlin.dev/sitemap.xml
