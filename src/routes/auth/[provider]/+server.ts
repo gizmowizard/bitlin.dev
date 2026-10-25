@@ -22,8 +22,8 @@ export const GET: RequestHandler = async (event) => {
         secure: config.prod,
         maxAge: 600
     });
-
-    //inspect uri because something is trggering svelte's inbuilt errors
-    console.log('[oauth] URL:', url);
-    redirect(302, url);
+    
+    // all because of sv kit 3 not accepting perfectly fine uris, we have to complicate the redirect. oof.
+    // console.log('[oauth] URL:', url);
+    return new Response(null, { status: 302, headers: { location: url, 'cache-control': 'no-store' } });
 };
