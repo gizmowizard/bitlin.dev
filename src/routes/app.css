@@ -1,16 +1,16 @@
 /* ──────────────────────────────────────────────────────────────
-   Bitlin design tokens
-   Flat colours only, one solid colour per surface. No glows and no
-   drop shadows. Depth comes from:
-     1. stacked flat layers (--page  <  --bg  <  floating glass)
-     2. 1px borders
-     3. crisp 1px rim highlights (--rim)
-   Glass = translucent flat fill + backdrop blur, used on floating
-   things only (buttons, dropdown menus, native select pickers).
+   Bitlin design system: modern retro, with a 2002 forum accent.
 
-   Theme: light is the default. Dark is applied by
-   <html data-theme="dark">, set before first paint by the inline
-   script in app.html and switched from the avatar menu.
+   Colours: flat only, one solid colour per surface. No glows,
+   no drop shadows.
+   Depth: stacked flat layers + 1px borders + classic two-edge
+   bevels (--raised / --sunken), drawn with crisp zero-blur inset
+   lines so nothing ever glows.
+   Type:  Tahoma (bold) for UI chrome (headings, buttons, tabs, labels,
+          badges); Lexend for everything you read.
+   Theme: light is the default; <html data-theme="dark"> is Onyx.
+          The attribute is set before first paint by the inline
+          script in app.html and switched from the avatar menu.
    ────────────────────────────────────────────────────────────── */
 :root {
     color-scheme: light;
@@ -21,8 +21,8 @@
 
     /* surfaces */
     --page: #eaecfb;      /* the canvas behind everything */
-    --bg: #ffffff;        /* raised panels: cards, lists, inputs, header */
-    --surface: #f6f7ff;   /* subtle fill inside panels */
+    --bg: #ffffff;        /* raised panels: cards, lists, inputs */
+    --surface: #f6f7ff;   /* zebra rows, subtle fills */
     --surface-2: #dfe2fa; /* chips, kbd, inline code */
 
     /* text */
@@ -33,7 +33,22 @@
 
     /* lines */
     --line: #d0d4f0;
-    --line-strong: #8489c4; /* form controls: >=3:1 against --bg */
+    --line-strong: #8489c4;
+    --edge: var(--line-strong); /* borders on panels and controls */
+
+    /* forum chrome */
+    --bar: var(--blue-deep);    /* header + title bars */
+    --bar-edge: #2f2f9c;
+    --on-bar: #ffffff;
+    --on-bar-soft: #e4e5ff;
+
+    /* controls */
+    --face: var(--surface-2);
+    --face-hover: #d1d5f6;
+    --bevel-hi: #ffffff;
+    --bevel-lo: #8d92cc;
+    --raised: inset 1px 1px 0 var(--bevel-hi), inset -1px -1px 0 var(--bevel-lo);
+    --sunken: inset 1px 1px 0 var(--bevel-lo), inset -1px -1px 0 var(--bevel-hi);
 
     /* diff + status */
     --add-bg: #dfe0ff;
@@ -43,22 +58,14 @@
     --danger: #c4162c;
     --danger-line: #e59aa4;
 
-    /* glass */
-    --glass-fill: rgba(255, 255, 255, 0.6);
-    --glass-fill-hover: rgba(255, 255, 255, 0.86);
-    --glass-line: rgba(65, 67, 209, 0.22);
-    --pop-fill: rgba(255, 255, 255, 0.8);
+    /* floating menus: slightly translucent + blur (the modern bit) */
+    --pop-fill: rgba(255, 255, 255, 0.93);
     --item-hover: rgba(90, 92, 255, 0.13);
-    --blur-btn: blur(12px) saturate(1.6);
-    --blur-pop: blur(24px) saturate(1.8);
+    --blur-pop: blur(10px) saturate(1.5);
 
-    /* crisp inner edges (no blur, so nothing glows) */
-    --rim: inset 0 1px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 0 rgba(40, 44, 140, 0.07);
-    --rim-down: inset 0 2px 0 rgba(40, 44, 140, 0.16);
-    --inset: inset 0 2px 0 rgba(28, 30, 100, 0.07);
-
-    --radius: 12px;
+    --radius: 3px;
     --font-display: Tahoma, 'Segoe UI', Verdana, 'DejaVu Sans', sans-serif;
+    --font-ui: var(--font-display);
     --font: 'Lexend', system-ui, sans-serif;
     --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 }
@@ -79,6 +86,12 @@
     --line: #232327;
     --line-strong: #62626c;
 
+    --bar-edge: #2a2a94;
+
+    --face-hover: #28282d;
+    --bevel-hi: #3d3d45;
+    --bevel-lo: #000000;
+
     --add-bg: #181b45;
     --add-strong: #262c7a;
     --del-bg: #35121a;
@@ -86,54 +99,46 @@
     --danger: #ff8593;
     --danger-line: rgba(255, 133, 147, 0.45);
 
-    --glass-fill: rgba(255, 255, 255, 0.06);
-    --glass-fill-hover: rgba(255, 255, 255, 0.12);
-    --glass-line: rgba(255, 255, 255, 0.12);
-    --pop-fill: rgba(12, 12, 14, 0.82);
+    --pop-fill: rgba(12, 12, 14, 0.94);
     --item-hover: rgba(255, 255, 255, 0.08);
-
-    --rim: inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.5);
-    --rim-down: inset 0 2px 0 rgba(0, 0, 0, 0.6);
-    --inset: inset 0 2px 0 rgba(0, 0, 0, 0.55);
 }
 
 /* No backdrop-filter support, or the user asked for less transparency:
-   fall back to opaque flat fills so text stays readable. The second
-   selector matches the dark block's specificity so it still wins. */
+   opaque menus. The second selector matches the dark block's
+   specificity so it still wins. */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    :root, :root[data-theme='dark'] {
-        --blur-btn: none;
-        --blur-pop: none;
-        --glass-fill: var(--bg);
-        --glass-fill-hover: var(--surface);
-        --pop-fill: var(--bg);
-    }
+    :root, :root[data-theme='dark'] { --blur-pop: none; --pop-fill: var(--bg); }
 }
 @media (prefers-reduced-transparency: reduce) {
-    :root, :root[data-theme='dark'] {
-        --blur-btn: none;
-        --blur-pop: none;
-        --glass-fill: var(--bg);
-        --glass-fill-hover: var(--surface);
-        --pop-fill: var(--bg);
-    }
+    :root, :root[data-theme='dark'] { --blur-pop: none; --pop-fill: var(--bg); }
 }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; min-height: 100%; background: var(--page); color: var(--fg); }
-body { font-family: var(--font); font-weight: 400; font-size: 16px; line-height: 1.6; -webkit-text-size-adjust: 100%; }
+body { font-family: var(--font); font-weight: 400; font-size: 15px; line-height: 1.55; -webkit-text-size-adjust: 100%; }
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; text-underline-offset: 3px; }
-h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; line-height: 1.2; margin: 0; letter-spacing: -0.01em; }
-h1 { font-size: clamp(1.75rem, 4.5vw, 2.25rem); }
-h2 { font-size: 1.4rem; }
-h3 { font-size: 1.15rem; }
 p { margin: 0; }
 code, pre, .mono { font-family: var(--mono); font-size: 0.88em; }
 :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 ::selection { background: var(--blue); color: #fff; }
-hr { border: 0; border-top: 1px solid var(--line); margin: 1.5rem 0; }
+/* etched divider: a dark line over a light line, like old forum rules */
+hr { border: 0; border-top: 1px solid var(--bevel-lo); border-bottom: 1px solid var(--bevel-hi); margin: 1.5rem 0; }
 b, strong { font-weight: 500; }
+
+/* ── Headings (Tahoma bold) ───────────────────────────────────── */
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; line-height: 1.2; margin: 0; letter-spacing: -0.01em; }
+h1 { font-size: clamp(1.7rem, 4.5vw, 2.15rem); }
+h2 { font-size: 1.25rem; padding-bottom: 0.2rem; border-bottom: 2px solid var(--bar); }
+h3 { font-size: 1rem; padding-bottom: 0.15rem; border-bottom: 1px solid var(--edge); }
+h2 .muted { font-weight: 400; }
+/* first heading in a card becomes its flush blue title bar */
+.card > h2:first-child, .card > h3:first-child {
+    margin: -0.9rem -1rem 0; padding: 0.4rem 0.8rem;
+    background: var(--bar); color: var(--on-bar); border: 0; border-radius: 2px 2px 0 0;
+    font-size: 0.9rem; letter-spacing: 0;
+}
+.empty h2, .empty h3 { border: 0; padding: 0; }
 
 .page { max-width: 1120px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
 .narrow { max-width: 680px; }
@@ -149,64 +154,58 @@ b, strong { font-weight: 500; }
 .two-col { display: grid; gap: 1.5rem; grid-template-columns: minmax(0, 1fr) 300px; align-items: start; }
 @media (max-width: 860px) { .two-col { grid-template-columns: minmax(0, 1fr); } }
 
-/* ── Floating glass surface (dropdowns, menus, pickers) ───────── */
+/* ── Floating menus (account menu, ref picker, select pickers) ── */
 .glass {
     background: var(--pop-fill);
-    border: 1px solid var(--glass-line);
-    border-radius: 14px;
-    box-shadow: var(--rim);
+    border: 1px solid var(--edge);
+    border-radius: var(--radius);
+    box-shadow: var(--raised);
     -webkit-backdrop-filter: var(--blur-pop);
     backdrop-filter: var(--blur-pop);
-    animation: pop-in 0.14s ease-out;
 }
-@keyframes pop-in { from { opacity: 0; transform: translateY(-4px); } }
 
-/* ── Buttons: liquid glass ────────────────────────────────────── */
+/* ── Buttons: classic bevel ───────────────────────────────────── */
 .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;
-    font: inherit; font-weight: 500; font-size: 0.92rem; line-height: 1;
-    padding: 0.65rem 1rem; border-radius: 10px; cursor: pointer;
+    font-family: var(--font-ui); font-weight: 700; font-size: 0.82rem; line-height: 1;
+    padding: 0.55rem 0.95rem; border-radius: var(--radius); cursor: pointer;
     color: var(--fg);
-    background: var(--glass-fill);
-    border: 1px solid var(--glass-line);
-    box-shadow: var(--rim);
-    -webkit-backdrop-filter: var(--blur-btn);
-    backdrop-filter: var(--blur-btn);
+    background: var(--face);
+    border: 1px solid var(--edge);
+    box-shadow: var(--raised);
     -webkit-tap-highlight-color: transparent;
-    transition: background 0.15s, border-color 0.15s, box-shadow 0.15s, transform 0.1s;
+    transition: background 0.1s;
     white-space: nowrap;
 }
-.btn:hover { background: var(--glass-fill-hover); transform: translateY(-1px); text-decoration: none; }
-.btn:active { transform: translateY(1px); box-shadow: var(--rim-down); }
+.btn:hover { background: var(--face-hover); text-decoration: none; }
+.btn:active { box-shadow: var(--sunken); }
 .btn[disabled], .btn[aria-disabled='true'] { opacity: 0.5; pointer-events: none; }
 
-/* Primary stays a solid flat blue so white text is always legible. */
+/* Primary stays solid brand blue so white text is always legible. */
 .btn.primary {
-    background: var(--blue); border-color: var(--blue-deep); color: #fff;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.38), inset 0 -1px 0 rgba(0, 0, 0, 0.18);
-    -webkit-backdrop-filter: none; backdrop-filter: none;
+    background: var(--blue); border-color: var(--bar-edge); color: #fff;
+    box-shadow: inset 1px 1px 0 #9fa1ff, inset -1px -1px 0 #3434b0;
 }
-.btn.primary:hover { background: var(--blue-deep); border-color: var(--blue-deep); }
-.btn.primary:active { box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.28); }
+.btn.primary:hover { background: var(--blue-deep); }
+.btn.primary:active { box-shadow: inset 1px 1px 0 #3434b0, inset -1px -1px 0 #9fa1ff; }
 
-.btn.ghost { background: transparent; border-color: transparent; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
-.btn.ghost:hover { background: var(--item-hover); box-shadow: none; transform: none; }
-.btn.ghost:active { box-shadow: none; transform: none; }
+.btn.ghost { background: transparent; border-color: transparent; box-shadow: none; }
+.btn.ghost:hover { background: var(--item-hover); }
+.btn.ghost:active { box-shadow: none; }
 
 .btn.danger { color: var(--danger); border-color: var(--danger-line); }
 .btn.danger:hover { background: var(--del-bg); }
 
-.btn.sm { padding: 0.45rem 0.75rem; font-size: 0.85rem; border-radius: 9px; }
-.btn.icon { padding: 0.55rem; }
+.btn.sm { padding: 0.4rem 0.7rem; font-size: 0.78rem; }
+.btn.icon { padding: 0.5rem; }
 
-/* ── Forms ────────────────────────────────────────────────────── */
-.field { display: flex; flex-direction: column; gap: 0.35rem; }
-.field > label, .label { font-size: 0.85rem; font-weight: 500; color: var(--muted); }
+/* ── Forms: sunken fields ─────────────────────────────────────── */
+.field { display: flex; flex-direction: column; gap: 0.3rem; }
+.field > label, .label { font-family: var(--font-ui); font-size: 0.8rem; font-weight: 700; color: var(--muted); }
 .input, .select, .textarea {
-    font: inherit; font-size: 0.95rem; color: var(--fg); background: var(--bg);
-    border: 1px solid var(--line-strong); border-radius: 10px; padding: 0.6rem 0.75rem; width: 100%;
-    box-shadow: var(--inset);
-    transition: border-color 0.15s, box-shadow 0.15s;
+    font: inherit; font-size: 0.93rem; color: var(--fg); background: var(--bg);
+    border: 1px solid var(--edge); border-radius: 2px; padding: 0.5rem 0.65rem; width: 100%;
+    box-shadow: var(--sunken);
 }
 .input::placeholder, .textarea::placeholder { color: var(--muted); }
 .select { cursor: pointer; }
@@ -216,77 +215,82 @@ b, strong { font-weight: 500; }
 .hint { font-size: 0.82rem; color: var(--muted); }
 .err { font-size: 0.875rem; color: var(--danger); }
 
-/* Native <select> pickers get the same glass menu where the browser
-   supports customisable selects (Chromium 135+). Elsewhere the OS menu
-   is used, which is fine. */
+/* Native <select> pickers get the same menu where the browser supports
+   customisable selects (Chromium 135+). Elsewhere the OS menu is used. */
 @supports (appearance: base-select) {
     .select, .select::picker(select) { appearance: base-select; }
     .select::picker(select) {
-        padding: 0.35rem;
+        padding: 2px;
         color: var(--fg);
         background: var(--pop-fill);
-        border: 1px solid var(--glass-line);
-        border-radius: 14px;
-        box-shadow: var(--rim);
+        border: 1px solid var(--edge);
+        border-radius: var(--radius);
+        box-shadow: var(--raised);
         -webkit-backdrop-filter: var(--blur-pop);
         backdrop-filter: var(--blur-pop);
     }
-    .select option { padding: 0.5rem 0.65rem; border-radius: 8px; cursor: pointer; }
-    .select option:hover { background: var(--item-hover); }
+    .select option { padding: 0.4rem 0.6rem; border-radius: 2px; cursor: pointer; }
+    .select option:hover { background: var(--bar); color: var(--on-bar); }
     .select option:checked { color: var(--accent); font-weight: 500; }
+    .select option:checked:hover { color: var(--on-bar); }
 }
 
 /* ── Panels ───────────────────────────────────────────────────── */
-.card { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.1rem; }
+.card { background: var(--bg); border: 1px solid var(--edge); border-radius: var(--radius); padding: 0.9rem 1rem; }
 .card.flat { background: var(--surface); }
 /* :where() keeps this at zero specificity so .stack / .row can still set display. */
 :where(.card.link) { display: block; }
-.card.link { color: inherit; transition: border-color 0.15s, background 0.15s; }
+.card.link { color: inherit; transition: border-color 0.1s, background 0.1s; }
 .card.link:hover { border-color: var(--blue); text-decoration: none; background: var(--surface); }
 
-.list { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--bg); }
-.list > .item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border-top: 1px solid var(--line); min-width: 0; }
+.list { border: 1px solid var(--edge); border-radius: var(--radius); overflow: hidden; background: var(--bg); }
+.list > .item { display: flex; align-items: center; gap: 0.75rem; padding: 0.65rem 0.9rem; border-top: 1px solid var(--line); min-width: 0; }
 .list > .item:first-child { border-top: 0; }
+.list > .item:nth-child(even) { background: var(--surface); }
 .list > a.item { color: inherit; }
-.list > a.item:hover { background: var(--surface); text-decoration: none; }
+.list > a.item:hover { background: var(--surface-2); text-decoration: none; }
 
-.chip { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.8rem; font-weight: 500; padding: 0.15rem 0.6rem; border-radius: 99px; background: var(--surface-2); color: var(--accent); border: 1px solid var(--line); white-space: nowrap; }
-.chip.solid { background: var(--blue); color: #fff; border-color: var(--blue-deep); }
-.chip.red { color: var(--danger); background: var(--del-bg); border-color: transparent; }
-.chip.plain { background: transparent; color: var(--muted); }
-.kbd { font-family: var(--mono); font-size: 0.8rem; background: var(--surface-2); padding: 0.1rem 0.4rem; border-radius: 5px; border: 1px solid var(--line-strong); border-bottom-width: 2px; }
+.chip { display: inline-flex; align-items: center; gap: 0.3rem; font-family: var(--font-ui); font-size: 0.74rem; font-weight: 700; padding: 0.12rem 0.5rem; border-radius: 3px; background: var(--surface-2); color: var(--accent); border: 1px solid var(--line-strong); white-space: nowrap; }
+.chip.solid { background: var(--blue); color: #fff; border-color: var(--bar-edge); }
+.chip.red { color: var(--danger); background: var(--del-bg); border-color: var(--danger-line); }
+.chip.plain { background: transparent; color: var(--muted); border-color: var(--line); }
+.kbd { font-family: var(--mono); font-size: 0.8rem; background: var(--face); padding: 0.1rem 0.4rem; border-radius: 3px; border: 1px solid var(--edge); box-shadow: var(--raised); }
 
-.tabs { display: flex; gap: 0.15rem; overflow-x: auto; border-bottom: 1px solid var(--line); scrollbar-width: none; }
+/* Folder-style tabs. The active tab is white with a thick blue top edge.
+   (No negative-margin overlap: overflow-x:auto would clip it.) */
+.tabs { display: flex; gap: 2px; padding: 0 2px; overflow-x: auto; border-bottom: 1px solid var(--edge); scrollbar-width: none; }
 .tabs::-webkit-scrollbar { display: none; }
-.tabs a { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.7rem 0.85rem; color: var(--muted); font-weight: 500; font-size: 0.92rem; border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; }
-.tabs a:hover { color: var(--fg); text-decoration: none; }
-.tabs a[aria-current='page'] { color: var(--accent); border-bottom-color: var(--blue); }
-.tabs .count { font-size: 0.75rem; background: var(--surface-2); border-radius: 99px; padding: 0 0.45rem; color: var(--accent); }
+.tabs a { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.45rem 0.85rem; margin-top: 2px; color: var(--muted); font-family: var(--font-ui); font-weight: 700; font-size: 0.82rem; background: var(--face); border: 1px solid var(--edge); border-bottom: 0; border-radius: 3px 3px 0 0; white-space: nowrap; }
+.tabs a:hover { color: var(--fg); background: var(--face-hover); text-decoration: none; }
+.tabs a[aria-current='page'] { color: var(--accent); background: var(--bg); border-top: 3px solid var(--blue); margin-top: 0; padding-top: 0.4rem; }
+.tabs .count { font-size: 0.7rem; background: var(--bar); border-radius: 3px; padding: 0 0.4rem; color: var(--on-bar); }
 
-.empty { text-align: center; padding: 2.5rem 1rem; color: var(--muted); border: 1px dashed var(--line-strong); border-radius: var(--radius); }
+.empty { text-align: center; padding: 2.25rem 1rem; color: var(--muted); background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius); box-shadow: var(--sunken); }
 .empty h3 { color: var(--fg); margin-bottom: 0.3rem; }
 
 /* ── Rendered markdown ────────────────────────────────────────── */
 .md { overflow-wrap: anywhere; font-weight: 400; }
 .md > :first-child { margin-top: 0; }
 .md > :last-child { margin-bottom: 0; }
-.md h1, .md h2, .md h3, .md h4 { font-family: var(--font-display); font-weight: 700; margin: 1.4em 0 0.5em; }
-.md h1 { font-size: 1.75rem; } .md h2 { font-size: 1.4rem; } .md h3 { font-size: 1.15rem; } .md h4 { font-size: 1rem; }
+.md h1, .md h2, .md h3, .md h4 { margin: 1.4em 0 0.5em; border: 0; padding: 0; }
+.md h1, .md h2 { border-bottom: 1px solid var(--line-strong); padding-bottom: 0.2em; }
+.md h1 { font-size: 1.7rem; } .md h2 { font-size: 1.35rem; } .md h3 { font-size: 1.12rem; } .md h4 { font-size: 1rem; }
 .md p, .md ul, .md ol, .md blockquote, .md pre, .md table { margin: 0 0 0.9em; }
 .md ul, .md ol { padding-left: 1.4em; }
-.md img { max-width: 100%; border-radius: 6px; }
-.md code { background: var(--surface-2); padding: 0.1em 0.35em; border-radius: 5px; }
-.md pre { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 0.8rem 1rem; overflow-x: auto; box-shadow: var(--inset); }
+.md a { text-decoration: underline; text-underline-offset: 3px; }
+.md img { max-width: 100%; border-radius: 2px; }
+.md code { background: var(--surface-2); padding: 0.1em 0.35em; border-radius: 3px; }
+.md pre { background: var(--surface); border: 1px solid var(--edge); border-radius: var(--radius); padding: 0.8rem 1rem; overflow-x: auto; box-shadow: var(--sunken); }
 .md pre code { background: none; padding: 0; }
-.md blockquote { border-left: 3px solid var(--blue); padding: 0.1em 1em; color: var(--muted); }
+.md blockquote { border-left: 4px solid var(--bar); background: var(--surface); padding: 0.3em 1em; color: var(--muted); }
 .md table { border-collapse: collapse; display: block; overflow-x: auto; }
-.md th, .md td { border: 1px solid var(--line); padding: 0.35rem 0.7rem; }
-.md th { background: var(--surface); font-weight: 500; }
+.md th, .md td { border: 1px solid var(--line-strong); padding: 0.35rem 0.7rem; }
+.md th { background: var(--bar); color: var(--on-bar); font-family: var(--font-ui); font-weight: 700; text-align: left; }
+.md tr:nth-child(even) td { background: var(--surface); }
 .md hr { margin: 1.2rem 0; }
 
 .spin { animation: spin 0.9s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) {
     * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
-    .btn:hover { transform: none; }
 }

@@ -39,7 +39,8 @@
 
 <style>
     .av {
-        border-radius: 22%;
+        border-radius: 2px;
+        border: 1px solid var(--edge);
         flex: none;
         display: inline-block;
         object-fit: cover;

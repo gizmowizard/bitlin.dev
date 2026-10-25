@@ -107,7 +107,7 @@
         align-items: flex-start;
         padding: 0.7rem 0.8rem;
         border: 1px solid var(--line);
-        border-radius: 8px;
+        border-radius: 3px;
         cursor: pointer;
         background: var(--bg);
     }

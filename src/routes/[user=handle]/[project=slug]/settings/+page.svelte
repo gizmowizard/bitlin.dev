@@ -38,5 +38,6 @@
 </div>
 
 <style>
+    .danger-zone > h3:first-child { background: var(--red); }
     .danger-zone { border-color: color-mix(in srgb, var(--red) 45%, var(--bg)); background: var(--bg); }
 </style>

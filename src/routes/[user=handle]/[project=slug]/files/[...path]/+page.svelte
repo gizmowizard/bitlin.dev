@@ -92,7 +92,7 @@
     .bar { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--line); background: var(--surface); }
     .body { padding: 1rem 1.2rem; }
     .center { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; padding: 2.5rem 1rem; }
-    .center img { max-width: 100%; max-height: 70dvh; border-radius: 6px; }
+    .center img { max-width: 100%; max-height: 70dvh; border-radius: 2px; }
     .code { overflow-x: auto; font-family: var(--mono); font-size: 0.82rem; line-height: 1.55; padding: 0.5rem 0; }
     .ln { display: flex; min-width: max-content; }
     .ln a { flex: none; width: 3.6rem; text-align: right; padding-right: 0.9rem; color: var(--muted); user-select: none; }

@@ -54,7 +54,7 @@
         >
         <span class="grow"></span>
         {#if user}
-            <a class="btn sm primary" href="/new"
+            <a class="btn sm" href="/new"
                 ><Icon name="plus" size={15} />
                 <span class="hide-sm">New</span></a
             >
@@ -94,21 +94,25 @@
                 </div>
             </details>
         {:else}
-            <a class="btn sm primary" href="/#signin">Sign in</a>
+            <a class="btn sm" href="/#signin">Sign in</a>
         {/if}
     </div>
 </header>
 
 <style>
-    /* Opaque on purpose: a backdrop-filter here would become the
-       "backdrop root" for the glass menu inside it and stop the menu
-       from blurring the page behind it. */
+    /* Solid brand-blue forum bar. Opaque on purpose: a backdrop-filter here
+       would become the "backdrop root" for the menu inside it and stop the
+       menu from blurring the page behind it. */
     header {
-        border-bottom: 1px solid var(--line);
-        background: var(--bg);
+        border-bottom: 3px solid var(--bar-edge);
+        background: var(--bar);
         position: sticky;
         top: 0;
         z-index: 50;
+    }
+    /* the global blue focus ring would vanish on the blue bar */
+    header :global(:focus-visible) {
+        outline-color: var(--on-bar);
     }
     .bar {
         max-width: 1120px;
@@ -122,7 +126,7 @@
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        color: var(--fg);
+        color: var(--on-bar);
         font-family: var(--font-display);
         font-size: 1.35rem;
         font-weight: 700;
@@ -130,7 +134,8 @@
         line-height: 1;
     }
     .brand img {
-        border-radius: 22%;
+        border-radius: 3px;
+        border: 1px solid var(--on-bar);
     }
     .brand:hover {
         text-decoration: none;
@@ -139,12 +144,15 @@
         display: inline-flex;
         align-items: center;
         gap: 0.4rem;
-        color: var(--muted);
-        font-weight: 500;
+        color: var(--on-bar-soft);
+        font-family: var(--font-ui);
+        font-weight: 700;
+        font-size: 0.85rem;
     }
     .navlink:hover {
-        color: var(--fg);
-        text-decoration: none;
+        color: var(--on-bar);
+        text-decoration: underline;
+        text-underline-offset: 3px;
     }
     details {
         position: relative;
@@ -153,7 +161,10 @@
         list-style: none;
         cursor: pointer;
         display: flex;
-        border-radius: 9px;
+        padding: 1px;
+        background: var(--bg);
+        border: 1px solid var(--bar-edge);
+        border-radius: 3px;
     }
     summary::-webkit-details-marker {
         display: none;
@@ -172,8 +183,8 @@
         display: flex;
         align-items: center;
         gap: 0.6rem;
-        padding: 0.55rem 0.7rem;
-        border-radius: 8px;
+        padding: 0.5rem 0.7rem;
+        border-radius: 2px;
         color: var(--fg);
         background: none;
         border: 0;
@@ -185,7 +196,8 @@
     }
     .menu a:hover,
     .menu .signout:hover {
-        background: var(--item-hover);
+        background: var(--bar);
+        color: var(--on-bar);
         text-decoration: none;
     }
     .sep {
@@ -201,34 +213,39 @@
         padding: 0.3rem 0.35rem 0.3rem 0.7rem;
     }
     .theme-label {
-        font-size: 0.9rem;
+        font-family: var(--font-ui);
+        font-weight: 700;
+        font-size: 0.8rem;
     }
     .seg {
         display: flex;
         gap: 2px;
         padding: 2px;
-        border-radius: 10px;
+        border-radius: 3px;
         background: var(--surface);
-        border: 1px solid var(--line);
+        border: 1px solid var(--edge);
+        box-shadow: var(--sunken);
     }
     .seg button {
         display: inline-flex;
         align-items: center;
         justify-content: center;
         padding: 0.35rem 0.5rem;
-        border: 0;
-        border-radius: 8px;
+        border: 1px solid transparent;
+        border-radius: 2px;
         background: none;
         color: var(--muted);
         cursor: pointer;
     }
     .seg button:hover {
         color: var(--fg);
-        background: var(--item-hover);
+        background: var(--face-hover);
     }
     .seg button.on {
         background: var(--blue);
+        border-color: var(--bar-edge);
         color: #fff;
+        box-shadow: inset 1px 1px 0 #3434b0, inset -1px -1px 0 #9fa1ff;
     }
     @media (max-width: 560px) {
         .hide-sm {

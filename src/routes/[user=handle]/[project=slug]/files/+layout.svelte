@@ -75,7 +75,7 @@
     .explorer { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 1.25rem; align-items: start; }
     aside { position: sticky; top: 4.2rem; max-height: calc(100dvh - 5rem); display: flex; flex-direction: column; }
     .tree { overflow-y: auto; border: 1px solid var(--line); border-radius: var(--radius); padding: 0.3rem; background: var(--bg); }
-    .node { display: flex; align-items: center; gap: 0.4rem; width: 100%; border: 0; background: none; font: inherit; font-size: 0.875rem; font-weight: 400; color: var(--fg); padding: 0.28rem 0.4rem; border-radius: 6px; cursor: pointer; text-align: left; }
+    .node { display: flex; align-items: center; gap: 0.4rem; width: 100%; border: 0; background: none; font: inherit; font-size: 0.875rem; font-weight: 400; color: var(--fg); padding: 0.28rem 0.4rem; border-radius: 2px; cursor: pointer; text-align: left; }
     .node:hover { background: var(--item-hover); text-decoration: none; }
     .node.on { background: var(--blue); color: #fff; }
     .main { min-width: 0; display: flex; flex-direction: column; gap: 1rem; }

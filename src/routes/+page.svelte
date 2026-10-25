@@ -53,6 +53,8 @@
     main {
         --shape-1: #cfd2ff;
         --shape-2: #bfc2ff;
+        --shape-hi: rgba(255, 255, 255, 0.55);
+        --shape-lo: rgba(40, 44, 140, 0.16);
         position: relative;
         isolation: isolate;
         overflow: clip;
@@ -65,8 +67,8 @@
         padding: 2rem;
         text-align: center;
     }
-    /* Flat, solid shapes sitting behind the content so the glass buttons
-       have something to refract. Kept pale so text on top stays readable. */
+    /* Flat, solid "bricks" behind the content. Kept pale so text on top
+       stays readable; the bevel is just two crisp inset lines. */
     .shapes {
         position: absolute;
         inset: 0;
@@ -76,40 +78,52 @@
     .shapes i {
         position: absolute;
         display: block;
-        border-radius: 50%;
+        border-radius: 4px;
         aspect-ratio: 1;
+        box-shadow:
+            inset 4px 4px 0 var(--shape-hi),
+            inset -4px -4px 0 var(--shape-lo);
     }
     .s1 {
-        width: min(46vw, 420px);
-        left: -10vw;
-        top: -8vh;
+        width: min(42vw, 380px);
+        left: -8vw;
+        top: -6vh;
         background: var(--shape-1);
+        transform: rotate(-9deg);
     }
     .s2 {
-        width: min(38vw, 340px);
-        right: -9vw;
-        bottom: -6vh;
+        width: min(34vw, 300px);
+        right: -8vw;
+        bottom: -5vh;
         background: var(--shape-2);
+        transform: rotate(12deg);
     }
     .orb {
         position: absolute;
         z-index: -1;
-        right: -34px;
-        top: 6px;
-        width: 92px;
+        right: -30px;
+        top: 4px;
+        width: 64px;
         aspect-ratio: 1;
-        border-radius: 50%;
+        border-radius: 4px;
         background: var(--blue);
+        box-shadow:
+            inset 3px 3px 0 #9fa1ff,
+            inset -3px -3px 0 #3434b0;
+        transform: rotate(14deg);
         pointer-events: none;
     }
     :global(:root[data-theme="dark"]) main {
         --shape-1: #15153a;
         --shape-2: #1d1d52;
+        --shape-hi: rgba(255, 255, 255, 0.07);
+        --shape-lo: rgba(0, 0, 0, 0.45);
     }
     img {
         width: clamp(112px, 22vw, 160px);
         height: auto;
-        border-radius: 22%;
+        border-radius: 4px;
+        border: 2px solid var(--edge);
         margin-bottom: 1rem;
     }
     h1 {

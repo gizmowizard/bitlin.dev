@@ -39,7 +39,9 @@
         align-items: flex-start;
         gap: 0.6rem;
         padding: 0.7rem 0.8rem;
-        border-radius: 12px;
+        border-radius: 3px;
+        border: 1px solid var(--edge);
+        box-shadow: var(--raised);
         background: var(--fg);
         color: var(--bg);
         font-size: 0.88rem;

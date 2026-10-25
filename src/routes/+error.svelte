@@ -10,7 +10,7 @@
         alt=""
         width="72"
         height="72"
-        style="border-radius: 22%"
+        style="border-radius: 3px"
     />
     <h1 style="font-size: 4rem; color: var(--accent); margin-top: 1rem">
         {page.status}
